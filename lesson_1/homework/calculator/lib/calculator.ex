@@ -5,6 +5,8 @@ defmodule Calculator do
   A module for adding, subtracting, dividing and multiplying numbers.
   """
 
+  @type number_string() :: number() | String.t()
+
   @doc """
   Addition 2 numbers. The arguments can be integers or floats.
 
@@ -19,10 +21,9 @@ defmodule Calculator do
       iex> Calculator.addition("42", 2)
       "invalid arguments: must be integer or float type"
   """
-  def addition(num1, num2) when not (is_integer(num1) or is_float(num1)) or not (is_integer(num2) or is_float(num2)) do
-    invalid_arguments_message()
-  end
-  def addition(num1, num2), do: num1 + num2
+  @spec addition(number(), number()) :: number_string()
+  def addition(num1, num2) when is_number(num1) and is_number(num2), do: num1 + num2
+  def addition(_, _), do: invalid_arguments_message()
 
   @doc """
   Subtraction 2 numbers. The arguments can be integers or floats.
@@ -38,10 +39,9 @@ defmodule Calculator do
       iex> Calculator.subtraction("44", 2)
       "invalid arguments: must be integer or float type"
   """
-  def subtraction(num1, num2) when not (is_integer(num1) or is_float(num1)) or not (is_integer(num2) or is_float(num2)) do
-    invalid_arguments_message()
-  end
-  def subtraction(num1, num2), do: num1 - num2
+  @spec subtraction(number(), number()) :: number_string()
+  def subtraction(num1, num2) when is_number(num1) and is_number(num2), do: num1 - num2
+  def subtraction(_, _), do: invalid_arguments_message()
 
 
   @doc """
@@ -58,11 +58,10 @@ defmodule Calculator do
       iex> Calculator.division(42, 0)
       "division by zero is not allowed"
   """
-  def division(num1, num2) when not (is_integer(num1) or is_float(num1)) or not (is_integer(num2) or is_float(num2)) do
-    invalid_arguments_message()
-  end
-  def division(_, 0), do: "division by zero is not allowed"
-  def division(num1, num2), do: num1 / num2
+  @spec division(number(), number()) :: number_string()
+  def division(num1, 0) when is_number(num1), do: "division by zero is not allowed"
+  def division(num1, num2) when is_number(num1) and is_number(num2), do: num1 / num2
+  def division(_, _), do: invalid_arguments_message()
 
   @doc """
   Multiplication 2 numbers. The arguments can be integers or floats.
@@ -78,10 +77,9 @@ defmodule Calculator do
       iex> Calculator.multiplication("21", 2)
       "invalid arguments: must be integer or float type"
   """
-  def multiplication(num1, num2) when not (is_integer(num1) or is_float(num1)) or not (is_integer(num2) or is_float(num2)) do
-    invalid_arguments_message()
-  end
-  def multiplication(num1, num2), do: num1 * num2
+  @spec multiplication(number(), number()) :: number_string()
+  def multiplication(num1, num2) when is_number(num1) and is_number(num2), do: num1 * num2
+  def multiplication(_, _), do: invalid_arguments_message()
 
   defp invalid_arguments_message(), do: "invalid arguments: must be integer or float type"
 end

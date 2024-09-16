@@ -1,6 +1,6 @@
 # Calculator
 
-**TODO: Add description**
+**Supports adding, subtracting, dividing and multiplying numbers**
 
 ## Installation
 
