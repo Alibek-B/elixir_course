@@ -1,8 +1,5 @@
 # EchoServer
 
-**
-des**
-
 ## between two local processes
 ```
 server_pid = EchoServer.start
